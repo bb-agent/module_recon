@@ -50,48 +50,48 @@ if($service == $mod_name) {
         // COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
 	
 	$exec = "chmod 777 ../www.recon/db/";
-	exec_fruitywifi($exec);
+	exec_blackbulb($exec);
 	
 	$exec = "$bin_iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $port";
-	exec_fruitywifi($exec);
+	exec_blackbulb($exec);
 	
         $exec = "ln -s $mod_path/www.recon /var/www/recon";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
 		
 		//$exec = "$bin_mitmproxy -T --host -s 'inject_recon.py $io_in_ip' > /dev/null 2 &";
 		$exec = "$bin_mitmproxy --port $port -T --host -s 'inject_recon.py $io_in_ip' >> $mod_logs &";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
 		
     } else if($action == "stop") {
 	
 		// STOP MODULE
         
 		$exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $port";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
         $exec = "rm /var/www/recon";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
 		
 		$exec = "ps aux|grep -E 'mitmdump.+inject_recon' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 	
 		// COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "echo '' > $mod_logs";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
 	
     }
@@ -101,10 +101,10 @@ if($service == $mod_name) {
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
     
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     header("Location: ../../install.php?module=$mod_name");
     exit;

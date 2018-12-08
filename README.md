@@ -19,5 +19,5 @@ v1.1
 
 v1.0
 ---------------------------------
-- FruityWifi v2.1 is required
+- BlackBulb v2.1 is required
 - mitmproxy is required

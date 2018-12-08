@@ -117,7 +117,7 @@ function fileAction() {
 }
 
 function getMacAddress($p_ip) {
-    $path = "/usr/share/fruitywifi/logs/dhcp.leases";
+    $path = "/usr/share/blackbulb/logs/dhcp.leases";
     
     $exec = "grep '$p_ip' $path | awk {'print $2'}";
     exec($exec, $output);
