@@ -1,7 +1,7 @@
 module_recon
 ==============
 
-FruityWiFi reconnaissance module
+BlackBlulb reconnaissance module
 
 v1.2
 ---------------------------------
